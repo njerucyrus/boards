@@ -161,19 +161,21 @@ class User
             $firstName = $this->getFirstName();
             $lastName = $this->getLastName();
             $email = $this->getEmail();
+            $phoneNumber = $this->getPhoneNumber();
             $company = $this->getCompany();
             $accountType = $this->getAccountType();
             $username = $this->getUsername();
             $password = $this->getPassword();
 
             $stmt = $conn->prepare("INSERT INTO users(first_name, last_name,
-                                  email, company, account_type,username, password)
-                                  VALUES (:first_name, :last_name, :email, :company,
+                                  email,phone_number, company, account_type,username, password)
+                                  VALUES (:first_name, :last_name, :email,:phone_number, :company,
                                    :account_type,:username, :password)");
 
             $stmt->bindParam(":first_name", $firstName);
             $stmt->bindParam(":last_name", $lastName);
             $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":phone_number", $phoneNumber);
             $stmt->bindParam(":company", $company);
             $stmt->bindParam(":account_type", $accountType);
             $stmt->bindParam(":username", $username);
@@ -201,19 +203,22 @@ class User
             $firstName = $this->getFirstName();
             $lastName = $this->getLastName();
             $email = $this->getEmail();
+            $phoneNumber = $this->getPhoneNumber();
             $company = $this->getCompany();
             $accountType = $this->getAccountType();
             $username = $this->getUsername();
             $password = $this->getPassword();
 
-            $stmt = $conn->prepare("UPDATE users SET first_name=:first_name, last_name=:last_name
-                                     email=:email, company=:company, account_type=:account_type,
+
+            $stmt = $conn->prepare("UPDATE users SET first_name=:first_name, last_name=:last_name,
+                                     email=:email, phone_number=:phone_number, company=:company, account_type=:account_type,
                                       username=:username, password=:password WHERE id=:id");
 
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":first_name", $firstName);
             $stmt->bindParam(":last_name", $lastName);
             $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":phone_number", $phoneNumber);
             $stmt->bindParam(":company", $company);
             $stmt->bindParam(":account_type", $accountType);
             $stmt->bindParam(":username", $username);
@@ -265,6 +270,7 @@ class User
                 $response['first_name'] = $row['first_name'];
                 $response['last_name'] = $row['last_name'];
                 $response['email'] = $row['email'];
+                $response['phone_number'] = $row['phone_number'];
                 $response['company'] = $row['company'];
                 $response['account_type'] = $row['account_type'];
 
@@ -304,6 +310,7 @@ class User
                    $response['first_name'] = $row['first_name'];
                    $response['last_name'] = $row['last_name'];
                    $response['email'] = $row['email'];
+                   $response['phone_number'] = $row['phone_number'];
                    $response['company'] = $row['company'];
                    $response['account_type'] = $row['account_type'];
 
@@ -329,5 +336,3 @@ class User
     }
 
 }
-
-$user = new UserAccount();
