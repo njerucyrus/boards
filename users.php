@@ -18,47 +18,8 @@ class User extends Auth
     private $accountType;
     private $username;
     private $password;
+    private $rememberToken;
 
-    function create()
-    {
-        global $conn;
-        try {
-            /*
-             * Get the values using getters
-             */
-
-            $firstName = $this->getFirstName();
-            $lastName = $this->getLastName();
-            $email = $this->getEmail();
-            $phoneNumber = $this->getPhoneNumber();
-            $company = $this->getCompany();
-            $accountType = $this->getAccountType();
-            $username = $this->getUsername();
-            $password = $this->getPassword();
-
-            $stmt = $conn->prepare("INSERT INTO users(first_name, last_name,
-                                  email,phone_number, company, account_type,username, password)
-                                  VALUES (:first_name, :last_name, :email,:phone_number, :company,
-                                   :account_type,:username, :password)");
-
-            $stmt->bindParam(":first_name", $firstName);
-            $stmt->bindParam(":last_name", $lastName);
-            $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":phone_number", $phoneNumber);
-            $stmt->bindParam(":company", $company);
-            $stmt->bindParam(":account_type", $accountType);
-            $stmt->bindParam(":username", $username);
-            $stmt->bindParam(":password", $password);
-
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-
-            echo $e->getMessage();
-            return false;
-        }
-
-    }
 
     /**
      * @return mixed
@@ -188,6 +149,82 @@ class User extends Auth
         $this->password = $password;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRememberToken()
+    {
+        return $this->rememberToken;
+    }
+
+    /**
+     * @param mixed $rememberToken
+     */
+    public function setRememberToken($rememberToken)
+    {
+        $this->rememberToken = $rememberToken;
+    }
+
+
+
+    /*
+     * Encrypt the password and return
+     * the password hash.
+     */
+    public function makePassword()
+    {
+
+        $hash = password_hash($this->getPassword(), PASSWORD_BCRYPT);
+        return $hash;
+
+    }
+
+
+    /*
+     * CRUD HERE
+     */
+    function create()
+    {
+        global $conn;
+        try {
+            /*
+             * Get the values using getters
+             */
+
+            $firstName = $this->getFirstName();
+            $lastName = $this->getLastName();
+            $email = $this->getEmail();
+            $phoneNumber = $this->getPhoneNumber();
+            $company = $this->getCompany();
+            $accountType = $this->getAccountType();
+            $username = $this->getUsername();
+            $password = $this->makePassword();
+
+            $stmt = $conn->prepare("INSERT INTO users(first_name, last_name,
+                                  email,phone_number, company, account_type,username, password)
+                                  VALUES (:first_name, :last_name, :email,:phone_number, :company,
+                                   :account_type,:username, :password)");
+
+            $stmt->bindParam(":first_name", $firstName);
+            $stmt->bindParam(":last_name", $lastName);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":phone_number", $phoneNumber);
+            $stmt->bindParam(":company", $company);
+            $stmt->bindParam(":account_type", $accountType);
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":password", $password);
+
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+            return false;
+        }
+
+    }
+
+
     public function update($id)
     {
         global $conn;
@@ -204,7 +241,7 @@ class User extends Auth
             $company = $this->getCompany();
             $accountType = $this->getAccountType();
             $username = $this->getUsername();
-            $password = $this->getPassword();
+            $password = $this->makePassword();
 
 
             $stmt = $conn->prepare("UPDATE users SET first_name=:first_name, last_name=:last_name,
