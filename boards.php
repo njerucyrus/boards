@@ -427,5 +427,57 @@ class Board
 
     }
 
+    public function all()
+    {
+        global $conn;
+        try {
+            $stmt = $conn->prepare("SELECT * FROM boards WHERE 1");
+            $stmt->execute();
+            /*
+             * json array to hold the results
+             */
+            $json_array = array();
+            if ($stmt->rowCount() > 0) {
+                $result = array();
+
+
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                    $result['id'] = $row['id'];
+                    $result['board_code'] = $row['board_code'];
+                    $result['width'] = $row['width'];
+                    $result['height'] = $row['height'];
+                    $result['lat'] = $row['lat'];
+                    $result['lgn'] = $row['lgn'];
+                    $result['board_type'] = $row['board_type'];
+                    $result['price'] = $row['price'];
+                    $result['owned_by'] = $row['owned_by'];
+                    $result['weekly_impressions'] = $row['weekly_impressions'];
+
+                    array_push($json_array, $result);
+
+                }
+                return json_encode($json_array);
+            } else {
+                $json_array['output'] = 'No boards found!';
+                return json_encode($json_array);
+            }
+
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+
+            $json_array['output'] = 'error occurred!';
+            return json_encode($json_array);
+
+
+        }
+    }
 }
+
+/*
+ * Test response
+ */
+$b = new Board();
+print_r($b->all());
 

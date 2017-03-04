@@ -6,12 +6,9 @@
  * Time: 12:41 AM
  */
 
-require 'connectdb.php';
+require 'auth.php';
 
-$connection = new Connection();
-$conn = $connection->getConnection();
-
-class User
+class User extends Auth
 {
     private $firstName;
     private $lastName;
@@ -21,6 +18,47 @@ class User
     private $accountType;
     private $username;
     private $password;
+
+    function create()
+    {
+        global $conn;
+        try {
+            /*
+             * Get the values using getters
+             */
+
+            $firstName = $this->getFirstName();
+            $lastName = $this->getLastName();
+            $email = $this->getEmail();
+            $phoneNumber = $this->getPhoneNumber();
+            $company = $this->getCompany();
+            $accountType = $this->getAccountType();
+            $username = $this->getUsername();
+            $password = $this->getPassword();
+
+            $stmt = $conn->prepare("INSERT INTO users(first_name, last_name,
+                                  email,phone_number, company, account_type,username, password)
+                                  VALUES (:first_name, :last_name, :email,:phone_number, :company,
+                                   :account_type,:username, :password)");
+
+            $stmt->bindParam(":first_name", $firstName);
+            $stmt->bindParam(":last_name", $lastName);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":phone_number", $phoneNumber);
+            $stmt->bindParam(":company", $company);
+            $stmt->bindParam(":account_type", $accountType);
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":password", $password);
+
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+            return false;
+        }
+
+    }
 
     /**
      * @return mixed
@@ -150,47 +188,6 @@ class User
         $this->password = $password;
     }
 
-    function create()
-    {
-        global $conn;
-        try {
-            /*
-             * Get the values using getters
-             */
-
-            $firstName = $this->getFirstName();
-            $lastName = $this->getLastName();
-            $email = $this->getEmail();
-            $phoneNumber = $this->getPhoneNumber();
-            $company = $this->getCompany();
-            $accountType = $this->getAccountType();
-            $username = $this->getUsername();
-            $password = $this->getPassword();
-
-            $stmt = $conn->prepare("INSERT INTO users(first_name, last_name,
-                                  email,phone_number, company, account_type,username, password)
-                                  VALUES (:first_name, :last_name, :email,:phone_number, :company,
-                                   :account_type,:username, :password)");
-
-            $stmt->bindParam(":first_name", $firstName);
-            $stmt->bindParam(":last_name", $lastName);
-            $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":phone_number", $phoneNumber);
-            $stmt->bindParam(":company", $company);
-            $stmt->bindParam(":account_type", $accountType);
-            $stmt->bindParam(":username", $username);
-            $stmt->bindParam(":password", $password);
-
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-
-            echo $e->getMessage();
-            return false;
-        }
-
-    }
-
     public function update($id)
     {
         global $conn;
@@ -236,14 +233,12 @@ class User
     public function delete($id)
     {
         global $conn;
-        try
-        {
+        try {
             $stmt = $conn->prepare("DELETE FROM users WHERE id=:id");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
             return true;
-        }
-        catch (PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
@@ -252,16 +247,16 @@ class User
      * List account details for a given id
      */
     public function filterById($id)
-    {    global $conn;
+    {
+        global $conn;
         $response = array();
-        try
-        {
+        try {
 
             $stmt = $conn->prepare("SELECT * FROM users WHERE id=:id");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
 
-            if ($stmt->rowCount() > 0 ) {
+            if ($stmt->rowCount() > 0) {
 
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -275,64 +270,100 @@ class User
                 $response['account_type'] = $row['account_type'];
 
                 return json_encode($response);
-            }
-            else
-            {
+            } else {
                 $response['message'] = "No data found!";
                 return json_encode($response);
             }
 
-        }
-        catch (PDOException $e)
-        {
-            $response['message'] = "Error occurred! ".$e->getMessage();
+        } catch (PDOException $e) {
+            $response['message'] = "Error occurred! " . $e->getMessage();
             return json_encode($response);
         }
     }
 
     public function filter($query)
     {
-       global $conn;
+        global $conn;
 
-       try
-       {
-           $stmt = $conn->prepare($query);
-           $stmt->execute();
+        try {
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
 
-           if ($stmt->rowCount() > 0 ) {
+            if ($stmt->rowCount() > 0) {
 
-               $json_array = array();
+                $json_array = array();
 
-               while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-                   $response['id'] = $row['id'];
-                   $response['username'] = $row['username'];
-                   $response['first_name'] = $row['first_name'];
-                   $response['last_name'] = $row['last_name'];
-                   $response['email'] = $row['email'];
-                   $response['phone_number'] = $row['phone_number'];
-                   $response['company'] = $row['company'];
-                   $response['account_type'] = $row['account_type'];
+                    $response['id'] = $row['id'];
+                    $response['username'] = $row['username'];
+                    $response['first_name'] = $row['first_name'];
+                    $response['last_name'] = $row['last_name'];
+                    $response['email'] = $row['email'];
+                    $response['phone_number'] = $row['phone_number'];
+                    $response['company'] = $row['company'];
+                    $response['account_type'] = $row['account_type'];
 
-                   array_push($json_array, $response);
+                    array_push($json_array, $response);
 
-               }
+                }
 
-               return json_encode($json_array);
-           }
-           else
-           {
-               $response['message'] = "No data found!";
-               return json_encode($response);
-           }
+                return json_encode($json_array);
+            } else {
+                $response['message'] = "No data found!";
+                return json_encode($response);
+            }
 
 
-       }
-       catch (PDOException $e)
-       {
-           $response['message'] = "Error occurred! ".$e->getMessage();
-           return json_encode($response);
-       }
+        } catch (PDOException $e) {
+            $response['message'] = "Error occurred! " . $e->getMessage();
+            return json_encode($response);
+        }
+    }
+
+    public function all()
+    {
+        global $conn;
+
+        try {
+
+            $stmt = $conn->prepare("SELECT * FROM users WHERE 1");
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+
+                $json_array = array();
+
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                    $response['id'] = $row['id'];
+                    $response['username'] = $row['username'];
+                    $response['first_name'] = $row['first_name'];
+                    $response['last_name'] = $row['last_name'];
+                    $response['email'] = $row['email'];
+                    $response['phone_number'] = $row['phone_number'];
+                    $response['company'] = $row['company'];
+                    $response['account_type'] = $row['account_type'];
+
+                    array_push($json_array, $response);
+
+                }
+
+                return json_encode($json_array);
+            } else {
+                $response['message'] = "No data found!";
+                return json_encode($response);
+            }
+
+
+        } catch (PDOException $e) {
+            $response['message'] = "Error occurred! " . $e->getMessage();
+            return json_encode($response);
+        }
     }
 
 }
+
+
+
+
