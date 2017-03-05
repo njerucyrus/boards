@@ -5,12 +5,7 @@
  * Date: 3/4/17
  * Time: 3:15 AM
  */
-
 require '../connectdb.php';
-
-$connection = new Connection();
-
-$conn = $connection->getConnection();
 
 class Order
 {
@@ -121,7 +116,6 @@ class Order
     public function create()
     {
         global $conn;
-
         try
         {
             $orderId = $this->getOrderId();
@@ -186,7 +180,6 @@ class Order
     public function delete($id)
     {
         global $conn;
-
         try {
             $stmt = $conn->prepare("DELETE FROM orders WHERE id=:id");
             $stmt->bindParam(":id", $id);
@@ -207,8 +200,8 @@ class Order
      * return order matching certain id
      */
     public function filterByOrderId($id){
-        global $conn;
         $response = array();
+        global $conn;
         try
         {
             $stmt = $conn->prepare("SELECT * FROM orders WHERE id=:id");
@@ -254,7 +247,6 @@ class Order
      */
     public function filter($query)
     {
-
         global $conn;
         $response = array();
         try
@@ -346,19 +338,5 @@ class Order
 
 
 }
-
-$order = new Order();
-$order->setBoardId(17);
-$order->setOrderId('590384');
-$order->setRefNo("#47KDI3");
-$order->setAmount(350.00);
-$order->setStatus('Completed');
-$order->setDate(date("Y-m-d"));
-
-print_r($order->filterByOrderId(4));
-
-//if($created){
-//    print_r($order->all());
-//}
 
 

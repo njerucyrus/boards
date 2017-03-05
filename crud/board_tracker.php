@@ -5,10 +5,6 @@
  * Date: 3/4/17
  * Time: 11:44 AM
  */
-require '../connectdb.php';
-
-$connection = new Connection();
-$conn = $connection->getConnection();
 
 
 class BoardTracker
@@ -17,6 +13,7 @@ class BoardTracker
     private $customer;
     private $dateBooked;
     private $days;
+
 
 
     public function getBoardCode()
@@ -95,7 +92,7 @@ class BoardTracker
 
 
     public function create()
-    {
+    {   
         global $conn;
         try {
             $boardCode = $this->getBoardCode();
@@ -156,7 +153,6 @@ class BoardTracker
     }
 
     public function delete($id)
-
     {
         global $conn;
         try {
@@ -240,7 +236,6 @@ class BoardTracker
 
     public function all()
     {
-
         global $conn;
         try {
             $stmt = $conn->prepare("SELECT * FROM board_tracker WHERE 1");
@@ -277,19 +272,6 @@ class BoardTracker
 }
 
 
-$bt = new BoardTracker();
-$bt->setBoardCode('256#');
-$bt->setCustomer('Hudutech solns');
-$bt->setDateBooked(date('Y-m-d'));
-$bt->setDays(30);
-
-$created = $bt->create();
-
-if($created)
-{
-    print_r($bt->all());
-
-}
 
 
 

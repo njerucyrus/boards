@@ -5,11 +5,7 @@
  * Date: 3/3/17
  * Time: 9:41 PM
  */
-require 'connectdb.php';
-
-
-$connection = new Connection();
-$conn = $connection->getConnection();
+require '../connectdb.php';
 
 class Board
 {
@@ -20,22 +16,13 @@ class Board
     private $lat;
     private $lgn;
     private $town;
+    private $location;
     private $boardType;
     private $price;
     private $ownedBy;
+    private $seenBy;
+    private  $image;
     private $weeklyImpression;
-
-    /*
-     * Uncoment  the constractor later
-     *
-     */
-
-//    private $conn;
-//
-//    public function __construct($conn)
-//    {
-//        $this->conn = $conn;
-//    }
 
     /**
      * @return mixed
@@ -152,6 +139,24 @@ class Board
     /**
      * @return mixed
      */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
     public function getBoardType()
     {
         return $this->boardType;
@@ -200,6 +205,41 @@ class Board
     /**
      * @return mixed
      */
+    public function getSeenBy()
+    {
+        return $this->seenBy;
+    }
+
+    /**
+     * @param mixed $seenBy
+     */
+    public function setSeenBy($seenBy)
+    {
+        $this->seenBy = $seenBy;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
     public function getWeeklyImpression()
     {
         return $this->weeklyImpression;
@@ -231,17 +271,20 @@ class Board
             $lat = $this->getLat();
             $lgn = $this->getLgn();
             $town = $this->getTown();
+            $location = $this->getLocation();
             $boardType = $this->getBoardType();
             $price = $this->getPrice();
             $ownedBy = $this->getOwnedBy();
+            $image = $this->getImage();
+            $seenBy = $this->getSeenBy();
             $weeklyImpressions = $this->getWeeklyImpression();
 
             $stmt = $conn->prepare("INSERT INTO boards(board_code, width, height,lat,
-                                  lgn,town,board_type,price,owned_by,
+                                  lgn,town,location, seen_by, board_type,price,owned_by,image,
                                   weekly_impressions)
                                   VALUES (:board_code, :width, :height,:lat,
-                                  :lgn,:town,:board_type,:price,:owned_by,
-                                  :weekly_impressions)
+                                  :lgn,:town,:board_type,:price,:owned_by, :image,
+                                  :weekly_impressions, :location, :seen_by)
                                   ");
 
             $stmt->bindParam(":board_code", $boardCode);
@@ -252,8 +295,12 @@ class Board
             $stmt->bindParam(":town", $town);
             $stmt->bindParam(":board_type", $boardType);
             $stmt->bindParam(":price", $price);
+            $stmt->bindParam(":image", $image);
             $stmt->bindParam(":owned_by", $ownedBy);
             $stmt->bindParam(":weekly_impressions", $weeklyImpressions);
+            $stmt->bindParam(":location", $location);
+            $stmt->bindParam(":seen_by", $seenBy);
+
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -283,12 +330,16 @@ class Board
             $boardType = $this->getBoardType();
             $price = $this->getPrice();
             $ownedBy = $this->getOwnedBy();
+            $image = $this->getImage();
             $weeklyImpressions = $this->getWeeklyImpression();
+            $location = $this->getLocation();
+            $seenBy = $this->getSeenBy();
 
             $stmt = $conn->prepare("UPDATE boards SET board_code=:board_code, width=:width, height=:height,
                                     lat=:lat, lgn=:lgn,town=:town, board_type=:board_type,
-                                    price=:price, owned_by=:owned_by, 
-                                    weekly_impressions=:weekly_impressions
+                                    price=:price, owned_by=:owned_by, image=:image,
+                                    weekly_impressions=:weekly_impressions, 
+                                    location=:location, seen_by=:seen_by
                                     WHERE id=:id");
 
             /*
@@ -303,8 +354,11 @@ class Board
             $stmt->bindParam(":town", $town);
             $stmt->bindParam(":board_type", $boardType);
             $stmt->bindParam(":price", $price);
+            $stmt->bindParam(":image", $image);
             $stmt->bindParam(":owned_by", $ownedBy);
             $stmt->bindParam(":weekly_impressions", $weeklyImpressions);
+            $stmt->bindParam(":location", $location);
+            $stmt->bindParam(":seen_by", $seenBy);
             /*
              * Execute and return true
              */
@@ -337,92 +391,51 @@ class Board
     {
         global $conn;
         try {
+
             $stmt = $conn->prepare("SELECT * FROM boards WHERE id=:id");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
 
-            /*
-             * Create a  array to hold the results
-             */
-            $result = array();
-
             if ($stmt->rowCount() > 0) {
 
 
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $queryObject = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                $result['id'] = $row['id'];
-                $result['board_code'] = $row['board_code'];
-                $result['width'] = $row['width'];
-                $result['height'] = $row['height'];
-                $result['lat'] = $row['lat'];
-                $result['lgn'] = $row['lgn'];
-                $result['board_type'] = $row['board_type'];
-                $result['price'] = $row['price'];
-                $result['owned_by'] = $row['owned_by'];
-                $result['weekly_impressions'] = $row['weekly_impressions'];
-
-                return json_encode($result);
+                return $queryObject;
 
             } else {
-                $json_array['output'] = 'No boards found!';
-                return json_encode($json_array);
+                return null;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
-            $json_array['output'] = 'error occurred!';
-            return json_encode($json_array);
+            return null;
+
         }
 
     }
 
-    /*
-     * function that returns a json response
-     * of the the boards being selected
-     */
+
 
     public function filter($query)
     {
         global $conn;
         try {
             $stmt = $conn->prepare($query);
+
             $stmt->execute();
-            /*
-             * json array to hold the results
-             */
-            $json_array = array();
+
             if ($stmt->rowCount() > 0) {
-                $result = array();
+                return $stmt;
 
-
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-                    $result['id'] = $row['id'];
-                    $result['board_code'] = $row['board_code'];
-                    $result['width'] = $row['width'];
-                    $result['height'] = $row['height'];
-                    $result['lat'] = $row['lat'];
-                    $result['lgn'] = $row['lgn'];
-                    $result['board_type'] = $row['board_type'];
-                    $result['price'] = $row['price'];
-                    $result['owned_by'] = $row['owned_by'];
-                    $result['weekly_impressions'] = $row['weekly_impressions'];
-
-                    array_push($json_array, $result);
-
-                }
-                return json_encode($json_array);
             } else {
-                $json_array['output'] = 'No boards found!';
-                return json_encode($json_array);
+                return null;
             }
 
 
         } catch (PDOException $e) {
             echo $e->getMessage();
 
-            $json_array['output'] = 'error occurred!';
-            return json_encode($json_array);
+                return null;
         }
 
     }
@@ -432,45 +445,23 @@ class Board
         global $conn;
         try {
             $stmt = $conn->prepare("SELECT * FROM boards WHERE 1");
+           // $stmt = $this->conn->prepare("SELECT * FROM boards WHERE 1");
             $stmt->execute();
-            /*
-             * json array to hold the results
-             */
-            $json_array = array();
+
             if ($stmt->rowCount() > 0) {
-                $result = array();
 
-
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-                    $result['id'] = $row['id'];
-                    $result['board_code'] = $row['board_code'];
-                    $result['width'] = $row['width'];
-                    $result['height'] = $row['height'];
-                    $result['lat'] = $row['lat'];
-                    $result['lgn'] = $row['lgn'];
-                    $result['board_type'] = $row['board_type'];
-                    $result['price'] = $row['price'];
-                    $result['owned_by'] = $row['owned_by'];
-                    $result['weekly_impressions'] = $row['weekly_impressions'];
-
-                    array_push($json_array, $result);
-
-                }
-                return json_encode($json_array);
+                return $stmt;
             } else {
-                $json_array['output'] = 'No boards found!';
-                return json_encode($json_array);
+
+               return null;
             }
+
 
 
         } catch (PDOException $e) {
             echo $e->getMessage();
 
-            $json_array['output'] = 'error occurred!';
-            return json_encode($json_array);
-
-
+            return null;
         }
     }
 }

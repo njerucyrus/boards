@@ -7,19 +7,20 @@
  */
 require '../connectdb.php';
 
-$connection = new Connection();
-$conn = $connection->getConnection();
-
 class Auth
 {
 
     private $token;
+    //private $conn;
+//    public function __construct($conn)
+//    {
+//        $this->conn = $conn;
+//    }
 
 
     public function authenticate($username, $password)
     {
         global $conn;
-
         try {
             $stmt = $conn->prepare("SELECT * FROM users WHERE username=:username");
             $stmt->bindParam(":username", $username);

@@ -6,35 +6,24 @@
  * Time: 7:58 PM
  */
 
+$databaseName = 'billboard';
+$password = '';
+$databaseHost = 'localhost';
+$databaseUser = 'root';
 
-class Connection
-{
-    private $databaseName = 'billboard';
-    private $password = '';
-    private $databaseHost = 'localhost';
-    private $databaseUser = 'root';
-    private $conn;
+try {
+    $conn = new PDO(
+        "mysql:host={$databaseHost};
+                dbname={$databaseName}",
+        $databaseUser,
+        $password
+    );
 
-    function getConnection()
-    {
-        try {
-            $this->conn = new PDO(
-                "mysql:host={$this->databaseHost};
-                dbname={$this->databaseName}",
-                $this->databaseUser,
-                $this->password
-            );
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // set the PDO error mode to exception
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            return $this->conn;
-        }
-        catch(PDOException $e)
-        {
-            echo "Connection failed: " . $e->getMessage();
-            return null;
-        }
-    }
-
+    //return $this->conn;
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+    //return null;
 }
