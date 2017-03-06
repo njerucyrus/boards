@@ -11,12 +11,6 @@ class Auth
 {
 
     private $token;
-    //private $conn;
-//    public function __construct($conn)
-//    {
-//        $this->conn = $conn;
-//    }
-
 
     public function authenticate($username, $password)
     {

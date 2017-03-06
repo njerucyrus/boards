@@ -253,6 +253,7 @@ class Board
         $this->weeklyImpression = $weeklyImpression;
     }
 
+
     public function create()
     {
         global $conn;
@@ -283,8 +284,8 @@ class Board
                                   lgn,town,location, seen_by, board_type,price,owned_by,image,
                                   weekly_impressions)
                                   VALUES (:board_code, :width, :height,:lat,
-                                  :lgn,:town,:board_type,:price,:owned_by, :image,
-                                  :weekly_impressions, :location, :seen_by)
+                                  :lgn,:town,:location, :seen_by,:board_type,:price,:owned_by,:image,
+                                  :weekly_impressions)
                                   ");
 
             $stmt->bindParam(":board_code", $boardCode);

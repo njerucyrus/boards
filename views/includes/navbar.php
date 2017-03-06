@@ -32,7 +32,7 @@
 
 </style>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -40,15 +40,33 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#myPage">Logo</a>
+            <a class="navbar-brand" href="#myPage">iBoard</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#services">SERVICES</a></li>
-                <li><a href="#portfolio">PORTFOLIO</a></li>
-                <li><a href="#pricing">PRICING</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="#">How it Works</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Knowledge Center</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Add Your Location</a></li>
+                <?php
+                if(isset($_SESSION['username'])){
+                    ?>
+                    <li><a href="#">Logged in as (<?php echo $_SESSION['username']?>)</a></li>
+                <?php
+                }
+                else {
+                    ?>
+                <li><a href="login.php">Login</a></li>
+
+                <?php
+                }
+                ?>
+
+
+
+
+
             </ul>
         </div>
     </div>

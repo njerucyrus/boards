@@ -115,7 +115,7 @@
     </column>
     <column id="33" parent="11" name="seen_by">
       <Position>12</Position>
-      <DataType>blob|0</DataType>
+      <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="34" parent="11" name="board_code">

@@ -8,9 +8,8 @@ session_start();
  */
 require '../connectdb.php';
 require '../crud/users.php';
-$connection = new Connection();
 
-$user = new User($connection->getConnection());
+$user = new User();
 
 $csrf_token = $user->generateCSRFToken();
 
@@ -66,7 +65,7 @@ if (isset(
     }
 }
 else{
-    echo "all fields required";
+
 }
 
 
@@ -85,7 +84,7 @@ else{
     <div class="row">
         <div class="col col-md-12">
         <div class="col col-md-4 col-md-offset-3">
-            <form class="form-group" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+            <form class="form-group" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" name="create-account-form">
                 <label for="first-name">First Name</label>
                 <input type="text" name="first-name" id="first-name" class="form-control">
 
