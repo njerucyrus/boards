@@ -19,15 +19,15 @@ $_SESSION['csrf_token'] = $csrf_token;
  * get the user details from the form
  */
 
-if (empty($_POST['submit']) and
-    empty($_POST['first-name']) and
-    empty($_POST['last-name']) and
-    empty($_POST['email']) and
-    empty($_POST['phone-number']) and
-    empty($_POST['company']) and
-    empty($_POST['account-type']) and
-    empty($_POST['username']) and
-    empty($_POST['password'])
+if (!empty($_POST['submit']) and
+    !empty($_POST['first-name']) and
+    !empty($_POST['last-name']) and
+    !empty($_POST['email']) and
+    !empty($_POST['phone-number']) and
+    !empty($_POST['company']) and
+    !empty($_POST['account-type']) and
+    !empty($_POST['username']) and
+    !empty($_POST['password'])
 
 ) {
 
