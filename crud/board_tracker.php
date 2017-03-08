@@ -5,14 +5,14 @@
  * Date: 3/4/17
  * Time: 11:44 AM
  */
+require '../connectdb.php';
 
-
-class BoardTracker
+class BoardTracker implements Crud
 {
-    private $boardCode;
-    private $customer;
-    private $dateBooked;
-    private $days;
+    private  $boardCode;
+    private  $customer;
+    private  $dateBooked;
+    private  $days;
 
 
 
@@ -91,12 +91,12 @@ class BoardTracker
     }
 
 
-    public function create()
+    public  function create()
     {   
         global $conn;
         try {
             $boardCode = $this->getBoardCode();
-            $customer = $this->getCustomer();
+            $customer =  $this->getCustomer();
             $dateBooked = $this->getDateBooked();
             $expiryDate = $this->getExpiryDate();
 
@@ -152,7 +152,7 @@ class BoardTracker
 
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         global $conn;
         try {
@@ -168,7 +168,7 @@ class BoardTracker
 
     }
 
-    public function filterById($id)
+    public static function filterById($id)
     {
         global $conn;
         try {
@@ -199,7 +199,7 @@ class BoardTracker
 
     }
 
-    public function filter($query)
+    public static function filter($query)
     {
         global $conn;
         try {
@@ -234,7 +234,7 @@ class BoardTracker
         }
     }
 
-    public function all()
+    public static function all()
     {
         global $conn;
         try {
@@ -270,6 +270,8 @@ class BoardTracker
     }
 
 }
+
+
 
 
 

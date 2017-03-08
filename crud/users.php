@@ -8,7 +8,7 @@
 
 require 'auth.php';
 
-class User extends Auth
+class User extends Auth implements Crud
 {
     private $firstName;
     private $lastName;
@@ -267,7 +267,7 @@ class User extends Auth
         }
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         global $conn;
         try {
@@ -283,7 +283,7 @@ class User extends Auth
     /*
      * List account details for a given id
      */
-    public function filterById($id)
+    public static function filterById($id)
     {
         global $conn;
         $response = array();
@@ -318,7 +318,7 @@ class User extends Auth
         }
     }
 
-    public function filter($query)
+    public static function filter($query)
     {
         global $conn;
 
@@ -358,7 +358,7 @@ class User extends Auth
         }
     }
 
-    public function all()
+    public static function all()
     {
         global $conn;
 

@@ -7,7 +7,7 @@
  */
 require '../connectdb.php';
 
-class Auth
+ class Auth
 {
 
     private $token;

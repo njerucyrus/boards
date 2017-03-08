@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../comapi/.idea/ErickApi.iml" filepath="$PROJECT_DIR$/../comapi/.idea/ErickApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../V-Water/.idea/V-Water.iml" filepath="$PROJECT_DIR$/../V-Water/.idea/V-Water.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/billboard.iml" filepath="$PROJECT_DIR$/.idea/billboard.iml" />
     </modules>
   </component>

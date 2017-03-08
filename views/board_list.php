@@ -9,7 +9,7 @@
  * Date: 3/5/17
  * Time: 11:29 AM
  */
-
+require '../crud/crud_interface.php';
 require '../crud/users.php';
 require '../crud/boards.php';
 require '../crud/board_tracker.php';
@@ -18,7 +18,6 @@ require '../crud/orders.php';
 
 $user = new User();
 
-$board = new Board();
 
 
 
@@ -39,7 +38,7 @@ $board = new Board();
                 </form>
             </div>
             <?php
-            $board_list = $board->all();
+            $board_list = Board::all();
             if (!is_null($board_list)) {
 
                 while ($row = $board_list->fetch(PDO::FETCH_ASSOC)) {

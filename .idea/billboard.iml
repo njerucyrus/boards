@@ -15,5 +15,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="ErickApi" />
+    <orderEntry type="module" module-name="V-Water" />
   </component>
 </module>

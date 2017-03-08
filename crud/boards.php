@@ -7,7 +7,7 @@
  */
 require '../connectdb.php';
 
-class Board
+class Board implements Crud
 {
     private $id;
     private $boardCode;
@@ -373,7 +373,7 @@ class Board
 
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         global $conn;
         try {
@@ -388,7 +388,7 @@ class Board
 
     }
 
-    public function filterById($id)
+    public static function filterById($id)
     {
         global $conn;
         try {
@@ -417,7 +417,7 @@ class Board
 
 
 
-    public function filter($query)
+    public static function filter($query)
     {
         global $conn;
         try {
@@ -441,7 +441,7 @@ class Board
 
     }
 
-    public function all()
+    public static function all()
     {
         global $conn;
         try {

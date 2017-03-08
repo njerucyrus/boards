@@ -7,7 +7,7 @@
  */
 require '../connectdb.php';
 
-class Order
+class Order implements Crud
 {
 
     private $orderId;
@@ -177,7 +177,7 @@ class Order
         }
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         global $conn;
         try {
@@ -199,7 +199,7 @@ class Order
     /*
      * return order matching certain id
      */
-    public function filterByOrderId($id){
+    public static function filterById($id){
         $response = array();
         global $conn;
         try
@@ -245,7 +245,7 @@ class Order
     /*
      * Filter with more options
      */
-    public function filter($query)
+    public static function filter($query)
     {
         global $conn;
         $response = array();
@@ -292,7 +292,7 @@ class Order
     /*
      * Get all orders
      */
-    public function all()
+    public static function all()
     {
         global $conn;
         $response = array();
