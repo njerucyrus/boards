@@ -399,10 +399,7 @@ class Board implements Crud
 
             if ($stmt->rowCount() > 0) {
 
-
-                $queryObject = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                return $queryObject;
+                return $stmt;
 
             } else {
                 return null;

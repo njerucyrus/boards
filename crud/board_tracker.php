@@ -100,6 +100,7 @@ class BoardTracker implements Crud
             $dateBooked = $this->getDateBooked();
             $expiryDate = $this->getExpiryDate();
 
+
             $stmt = $conn->prepare("INSERT INTO board_tracker(board_code, customer,
                                                 date_booked,expiry_date)
                                               VALUES(:board_code, :customer,
@@ -270,9 +271,6 @@ class BoardTracker implements Crud
     }
 
 }
-
-
-
 
 
 
