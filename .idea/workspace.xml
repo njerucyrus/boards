@@ -54,7 +54,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="crud_interface.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="crud_interface.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/crud/crud_interface.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
@@ -64,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="billboard.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="billboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/billboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+            <state relative-caret-position="460">
+              <caret line="302" column="34" lean-forward="true" selection-start-line="302" selection-start-column="34" selection-end-line="302" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -113,14 +113,14 @@
       <file leaf-file-name="boards.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/crud/boards.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
+            <state relative-caret-position="-992">
               <caret line="401" column="28" lean-forward="false" selection-start-line="401" selection-start-column="28" selection-end-line="401" selection-end-column="28" />
               <folding>
-                <marker date="1489030379269" expanded="true" signature="4766:5198" ph="INSERT INTO boards... " />
-                <marker date="1489030379269" expanded="true" signature="6989:7434" ph="UPDATE board... " />
-                <marker date="1489030379269" expanded="true" signature="8606:8637" ph="DELETE FROM " />
-                <marker date="1489030379269" expanded="true" signature="8975:9008" ph="SELECT * FRO... boards" />
-                <marker date="1489030379269" expanded="true" signature="9867:9895" ph="SELECT * FRO... boards" />
+                <marker date="1489036086045" expanded="true" signature="4766:5198" ph="INSERT INTO boards... " />
+                <marker date="1489036086045" expanded="true" signature="6989:7434" ph="UPDATE board... " />
+                <marker date="1489036086045" expanded="true" signature="8606:8637" ph="DELETE FROM " />
+                <marker date="1489036086045" expanded="true" signature="8975:9008" ph="SELECT * FRO... boards" />
+                <marker date="1489036086045" expanded="true" signature="9867:9895" ph="SELECT * FRO... boards" />
               </folding>
             </state>
           </provider>
@@ -197,8 +197,8 @@
         <option value="$PROJECT_DIR$/crud/crud_interface.php" />
         <option value="$PROJECT_DIR$/crud/board_tracker.php" />
         <option value="$PROJECT_DIR$/api/register_billboard.php" />
-        <option value="$PROJECT_DIR$/crud/boards.php" />
         <option value="$PROJECT_DIR$/api/billboard.php" />
+        <option value="$PROJECT_DIR$/crud/boards.php" />
       </list>
     </option>
   </component>
@@ -218,7 +218,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
     <option name="y" value="52" />
-    <option name="width" value="1291" />
+    <option name="width" value="1269" />
     <option name="height" value="686" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -399,24 +399,24 @@
       <workItem from="1488978417959" duration="4585000" />
       <workItem from="1488983511978" duration="600000" />
       <workItem from="1488989299091" duration="2777000" />
-      <workItem from="1489024097291" duration="7052000" />
+      <workItem from="1489024097291" duration="10783000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133807000" />
+    <option name="totallyTimeSpent" value="137538000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="52" width="1291" height="686" extended-state="0" />
-    <editor active="false" />
+    <frame x="65" y="52" width="1269" height="686" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29190058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29714286" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276923" sideWeight="0.5043755" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18524459" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1844898" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276923" sideWeight="0.4956245" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5084459" sideWeight="0.4972156" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.4972156" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -790,14 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/file_uploader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="41" column="38" lean-forward="true" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/crud/orders.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -812,14 +804,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crud/crud_interface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/add_board.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -828,24 +812,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/billboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="302" column="34" lean-forward="true" selection-start-line="302" selection-start-column="34" selection-end-line="302" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/crud/boards.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
+        <state relative-caret-position="-992">
           <caret line="401" column="28" lean-forward="false" selection-start-line="401" selection-start-column="28" selection-end-line="401" selection-end-column="28" />
           <folding>
-            <marker date="1489030379269" expanded="true" signature="4766:5198" ph="INSERT INTO boards... " />
-            <marker date="1489030379269" expanded="true" signature="6989:7434" ph="UPDATE board... " />
-            <marker date="1489030379269" expanded="true" signature="8606:8637" ph="DELETE FROM " />
-            <marker date="1489030379269" expanded="true" signature="8975:9008" ph="SELECT * FRO... boards" />
-            <marker date="1489030379269" expanded="true" signature="9867:9895" ph="SELECT * FRO... boards" />
+            <marker date="1489036086045" expanded="true" signature="4766:5198" ph="INSERT INTO boards... " />
+            <marker date="1489036086045" expanded="true" signature="6989:7434" ph="UPDATE board... " />
+            <marker date="1489036086045" expanded="true" signature="8606:8637" ph="DELETE FROM " />
+            <marker date="1489036086045" expanded="true" signature="8975:9008" ph="SELECT * FRO... boards" />
+            <marker date="1489036086045" expanded="true" signature="9867:9895" ph="SELECT * FRO... boards" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/billboard.php">
+    <entry file="file://$PROJECT_DIR$/views/file_uploader.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+        <state relative-caret-position="438">
+          <caret line="41" column="38" lean-forward="true" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crud/crud_interface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>

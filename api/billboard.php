@@ -9,7 +9,7 @@
 require_once '../crud/crud_interface.php';
 require_once '../crud/boards.php';
 
-$data = $data = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents('php://input'), true);
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 
@@ -47,19 +47,20 @@ switch ($request_method) {
  */
 function createBillBoard()
 {
-
+    global $data;
     if (!empty($data)) {
-        $boardCode = $data['boardCode'];
+        $boardCode = $data['board_code'];
         $town = $data['town'];
         $location = $data['location'];
-        $seenBy = $data['seenBy'];
-        $ownedBy = $data['ownedBy'];
-        $boardType = $data['boardType'];
+        $seenBy = $data['seen_by'];
+        $ownedBy = $data['owned_by'];
+        $boardType = $data['board_type'];
         $height = $data['height'];
         $width = $data['width'];
         $price = $data['price'];
-        $weeklyImpressions = $data['weeklyImpressions'];
-        $image = $data['image'];
+        $weeklyImpressions = $data['weekly_impressions'];
+        //$image = $data['image'];
+        $image = '';
         $lat = $data['lat'];
         $lgn = $data['lgn'];
         if (isset($image)) {
@@ -125,21 +126,22 @@ function createBillBoard()
 function updateBillBoard()
 {
 
-
-    if (!empty($data)) {
+    global $data;
+    if (isset($data)) {
 
         $id = $data['id'];
-        $boardCode = $data['boardCode'];
+        $boardCode = $data['board_code'];
         $town = $data['town'];
         $location = $data['location'];
-        $seenBy = $data['seenBy'];
-        $ownedBy = $data['ownedBy'];
-        $boardType = $data['boardType'];
+        $seenBy = $data['seen_by'];
+        $ownedBy = $data['owned_by'];
+        $boardType = $data['board_type'];
         $height = $data['height'];
         $width = $data['width'];
         $price = $data['price'];
-        $weeklyImpressions = $data['weeklyImpressions'];
-        $image = $data['image'];
+        $weeklyImpressions = $data['weekly_impressions'];
+        //$image = $data['image'];
+        $image = '';
         $lat = $data['lat'];
         $lgn = $data['lgn'];
 
@@ -204,23 +206,25 @@ function updateBillBoard()
  */
 function deleteBillBoard()
 {
+    global $data;
     if (!empty($data['id'])) {
         $id = $data['id'];
 
-        $deleted = Board::delete($id);
-        if ($deleted) {
-            print_r(json_encode(array(
-                "statusCode" => 204,
-                "status" => "success",
-                "message" => "billboard deleted successfully"
-            )));
-        } else {
-            print_r(json_encode(array(
-                "statusCode" => 500,
-                "status" => "failed",
-                "message" => "error occurred while deleting"
-            )));
-        }
+            $deleted = Board::delete($id);
+            if ($deleted) {
+                print_r(json_encode(array(
+                    "statusCode" => 204,
+                    "status" => "success",
+                    "message" => "billboard deleted successfully"
+                )));
+            } else {
+                print_r(json_encode(array(
+                    "statusCode" => 500,
+                    "status" => "failed",
+                    "message" => "error occurred while deleting"
+                )));
+            }
+
     } else {
         print_r(json_encode(array(
             "statusCode" => 500,
@@ -241,17 +245,18 @@ function getBillBoardById()
         $response = array();
         while ($row = $queryObject->fetch(PDO::FETCH_ASSOC)) {
             $response['id'] = $row['id'];
-            $response['boardCode'] = $row['board_code'];
+            $response['board_code'] = $row['board_code'];
             $response['width'] = $row['width'];
             $response['height'] = $row['height'];
             $response['lat'] = $row['lat'];
             $response['lgn'] = $row['lgn'];
             $response['town'] = $row['town'];
             $response['location'] = $row['location'];
-            $response['boardType'] = $row['board_type'];
+            $response['board_type'] = $row['board_type'];
             $response['price'] = $row['price'];
-            $response['seenBy'] = $row['seen_by'];
-            $response['weeklyImpressions'] = $row['weekly_impressions'];
+            $response['owned_by'] = $row['owned_by'];
+            $response['seen_by'] = $row['seen_by'];
+            $response['weekly_impressions'] = $row['weekly_impressions'];
         }
         print_r(json_encode($response));
     } catch (PDOException $e) {
@@ -277,17 +282,18 @@ function getAllBillBoards(){
         $response = array();
         while ($row = $queryObject->fetch(PDO::FETCH_ASSOC)) {
             $response['id'] = $row['id'];
-            $response['boardCode'] = $row['board_code'];
+            $response['board_code'] = $row['board_code'];
             $response['width'] = $row['width'];
             $response['height'] = $row['height'];
             $response['lat'] = $row['lat'];
             $response['lgn'] = $row['lgn'];
             $response['town'] = $row['town'];
             $response['location'] = $row['location'];
-            $response['boardType'] = $row['board_type'];
+            $response['board_type'] = $row['board_type'];
             $response['price'] = $row['price'];
-            $response['seenBy'] = $row['seen_by'];
-            $response['weeklyImpressions'] = $row['weekly_impressions'];
+            $response['owned_by'] = $row['owned_by'];
+            $response['seen_by'] = $row['seen_by'];
+            $response['weekly_impressions'] = $row['weekly_impressions'];
 
             array_push($json_array, $response);
         }
